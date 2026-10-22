@@ -113,3 +113,7 @@ goonbot/
 - Pull the video page on each source site (xHamster, etc.) for the top hits to get their tags and
   pornstar lists, and fold those into the embedding text.
 - Other sites: `parse.py` and the sitemap mapping are the only site-specific parts.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "Describe the video, get the video. Local semantic search over a tube site's catalogue."
 readme = "README.md"
 requires-python = ">=3.9"
+license = {text = "MIT"}
 dependencies = [
     "curl_cffi>=0.7",
     "lxml>=5",
