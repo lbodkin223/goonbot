@@ -1,6 +1,6 @@
 # goonbot
 
-Describe the video, get the video. A natural-language finder for gaymaletube.com, for when you
+Describe the video, get the video. A natural-language finder for well its self explanitory, for when you
 remember "blonde boy in gym" or half an actor's name but the site's own search gives you nothing.
 
 Runs entirely on your Mac. No API keys. The "LLM" is **Qwen3-Embedding-0.6B** (Alibaba, open
