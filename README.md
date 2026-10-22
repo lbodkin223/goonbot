@@ -26,26 +26,32 @@ The site has ~12.7 million videos and no video sitemap, so it is never scraped w
 The site is behind Cloudflare; requests go through `curl_cffi` with a Chrome TLS fingerprint, which
 passes the challenge without a browser.
 
-## Setup
+## Install
 
-Python 3.9+ with the packages in `requirements.txt` (on this machine they are already installed
-for the system `python3`):
+Python 3.9 or newer. The embedding model runs on an Apple GPU (MPS), an NVIDIA GPU (CUDA) or CPU;
+the first run downloads it (~1.1 GB) into `~/.cache/huggingface`.
 
 ```bash
-pip3 install --user -r requirements.txt
+pipx install git+https://github.com/lbodkin223/goonbot.git
 ```
 
-The first run downloads the model (~1.1 GB) into `~/.cache/huggingface`.
+or, without pipx:
+
+```bash
+pip install git+https://github.com/lbodkin223/goonbot.git
+```
+
+Either gives you a `goonbot` command. From a clone, `pip install -e .` does the same and picks up
+your edits. Then build the taxonomy index once (about 4 minutes on an M-series Mac):
 
 ```bash
 goonbot init
 ```
 
-## Use
+Everything it stores goes in `~/.goonbot/` (set `GOONBOT_DATA` to put it elsewhere). Delete that
+folder to start over.
 
-`bin/goonbot` is a launcher that works from any directory once linked into your PATH (already done
-on this machine: `ln -s "$PWD/bin/goonbot" ~/.local/bin/goonbot`). Inside the project folder,
-`python3 -m goonbot ...` does the same thing.
+## Use
 
 ```bash
 goonbot search blonde boy in gym
@@ -85,11 +91,10 @@ Everything lives in `goonbot/config.py`:
   exact word overlap with the title, whether the video sat on a matched page, thumbs-up %).
 - `CONCURRENCY`, `REQUEST_DELAY`: be polite to the site.
 
-Data is in `data/goonbot.db` (set `GOONBOT_DATA` to move it). Delete it to start over.
-
 ## Layout
 
 ```
+pyproject.toml   package metadata; `goonbot` console script
 goonbot/
   config.py   knobs
   fetch.py    Cloudflare-passing HTTP client, paced and parallel

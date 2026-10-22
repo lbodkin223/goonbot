@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = Path(os.environ.get("GOONBOT_DATA", str(ROOT / "data")))
+# Index, cache and vectors live here. Override with GOONBOT_DATA=/some/dir.
+DATA_DIR = Path(os.environ.get("GOONBOT_DATA", str(Path.home() / ".goonbot"))).expanduser()
 DB_PATH = DATA_DIR / "goonbot.db"
 
 BASE_URL = "https://www.gaymaletube.com"
