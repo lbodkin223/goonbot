@@ -1,0 +1,5 @@
+#!/bin/sh
+# Launcher so `goonbot ...` works from any directory. Symlinked into ~/.local/bin.
+HERE="$(cd "$(dirname "$(readlink "$0" || echo "$0")")/.." && pwd)"
+cd "$HERE" || exit 1   # python -m imports from the current directory first, so run from the project
+exec python3 -m goonbot "$@"

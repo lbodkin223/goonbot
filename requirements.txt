@@ -1,0 +1,8 @@
+curl_cffi>=0.7
+lxml>=5
+numpy>=1.26
+torch>=2.2
+sentence-transformers>=3.0
+fastapi>=0.110
+uvicorn>=0.29
+rich>=13
