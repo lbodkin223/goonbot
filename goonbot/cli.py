@@ -53,7 +53,7 @@ def cmd_crawl(args, bot):
 
 def cmd_serve(args, bot):
     from .web import serve
-    serve(args.host, args.port, bot)
+    serve(args.host, args.port, bot, open_browser=not args.no_open)
 
 
 def cmd_reindex(args, bot):
@@ -90,9 +90,10 @@ def main(argv=None):
     s.add_argument("--pages", type=int, default=1, help="pages per collection, 120 videos each (default 1)")
     s.set_defaults(fn=cmd_crawl)
 
-    s = sub.add_parser("serve", help="web UI with thumbnails")
+    s = sub.add_parser("serve", help="start the web UI and open it in your browser")
     s.add_argument("--host", default="127.0.0.1")
     s.add_argument("--port", type=int, default=8787)
+    s.add_argument("--no-open", action="store_true", help="do not open a browser window")
     s.set_defaults(fn=cmd_serve)
 
     s = sub.add_parser("reindex", help="re-embed cached videos after changing the model or tagging rules")

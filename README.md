@@ -58,7 +58,7 @@ goonbot search blonde boy in gym
 goonbot search "alex mecum" locker room
 goonbot search that one with the two twins and the plumber -n 40 -p 2
 goonbot search hairy daddy --local        # instant, cached index only
-goonbot serve                             # web UI with thumbnails at http://127.0.0.1:8787/
+goonbot serve                             # web UI with thumbnails; opens http://127.0.0.1:8787/ in your browser
 goonbot crawl --kinds cat,pornstar --top 300 --pages 2   # grow the index in bulk
 goonbot reindex                           # re-embed cached videos after changing the model
 goonbot stats

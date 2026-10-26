@@ -1,3 +1,7 @@
+import socket
+import threading
+import time
+import webbrowser
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Query
@@ -91,8 +95,25 @@ def make_app(bot):
     return app
 
 
-def serve(host, port, bot):
+def _open_when_ready(url, host, port, timeout=120):
+    """Open the browser once the server accepts connections (the model takes a few seconds to load)."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        try:
+            with socket.create_connection((host, port), timeout=1):
+                break
+        except OSError:
+            time.sleep(0.3)
+    else:
+        return
+    webbrowser.open(url)
+
+
+def serve(host, port, bot, open_browser=True):
     import uvicorn
     bot.verbose = True
-    print("goonbot web UI: http://%s:%d/" % (host, port))
+    url = "http://%s:%d/" % (host, port)
+    print("goonbot web UI: " + url)
+    if open_browser:
+        threading.Thread(target=_open_when_ready, args=(url, host, port), daemon=True).start()
     uvicorn.run(make_app(bot), host=host, port=port, log_level="warning")
